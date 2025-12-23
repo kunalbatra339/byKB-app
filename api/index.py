@@ -3,6 +3,8 @@ import os
 import requests
 import re
 from github import Github
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
