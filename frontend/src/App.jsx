@@ -198,7 +198,7 @@ def health():
 
 function Root() {
   return (
-    <GoogleOAuthProvider clientId="753460169154-c9g5edi2pb0mcmef7oh68nt29fdt97i3.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <App />
     </GoogleOAuthProvider>
   );
