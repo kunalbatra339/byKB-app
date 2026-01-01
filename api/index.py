@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # CONFIG
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-REPO_NAME = os.environ.get("GITHUB_REPO") # format: "username/repo"
+REPO_NAME = os.environ.get("REPO_NAME") # format: "username/repo"
 
 # DOMAIN REGEX
 ALLOWED_DOMAINS = r"^(https?:\/\/)?([\w-]+\.)+(onrender\.com|vercel\.app|cyclic\.app)(\/.*)?$"
@@ -30,21 +30,18 @@ def verify_google_token(token):
         return None
 
 def normalize_url(url):
-    # Strip whitespace
     url = url.strip()
+
     # Ensure protocol
     if not url.startswith("http"):
         url = "https://" + url
-    
+
     # Remove trailing slash
     if url.endswith("/"):
         url = url[:-1]
-        
-    # Check if ends with /_health, if not append
-    if not url.endswith("/_health"):
-        url += "/_health"
-        
+
     return url
+
 
 def get_issue(user_email):
     g = Github(GITHUB_TOKEN)

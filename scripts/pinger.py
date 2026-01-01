@@ -9,18 +9,23 @@ REPO_NAME = os.environ.get("REPO_NAME")
 
 def ping_url(url):
     try:
-        # 8 second timeout, allow redirect
         response = requests.get(url, timeout=8, allow_redirects=True)
-        # 200-399 is considered success for keepalive
-        if 200 <= response.status_code < 400:
+
+        # DEBUG: see if backend actually wakes up
+        print(f"Pinged {url} in {response.elapsed.total_seconds()}s (status {response.status_code})")
+
+        if response.status_code < 500:
             return True, response.status_code
         return False, response.status_code
-    except requests.exceptions.RequestException:
+
+    except requests.exceptions.RequestException as e:
+        print(f"Ping failed for {url}: {e}")
         return False, 0
+
 
 def run():
     # 1. Jitter (0-30s) to prevent exact second spikes
-    jitter = random.randint(0, 30)
+    jitter = random.randint(0, 10)
     print(f"Waiting {jitter}s jitter...")
     time.sleep(jitter)
 
@@ -52,7 +57,7 @@ def run():
             
             if not success:
                 # Retry once immediately if cold start suspected
-                time.sleep(1)
+                time.sleep(3)
                 success_retry, status_retry = ping_url(url)
                 if not success_retry:
                     all_alive = False
