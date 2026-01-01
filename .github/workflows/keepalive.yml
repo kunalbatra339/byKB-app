@@ -28,5 +28,5 @@ jobs:
       - name: Run Pinger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO_NAME: ${{ github.repository }}
+          GITHUB_REPO: ${{ github.repository }}
         run: python scripts/pinger.py

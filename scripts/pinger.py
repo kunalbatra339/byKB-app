@@ -5,7 +5,7 @@ import random
 from github import Github
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-REPO_NAME = os.environ.get("REPO_NAME")
+REPO_NAME = os.environ.get("GITHUB_REPO")
 
 def ping_url(url):
     try:

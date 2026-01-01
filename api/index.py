@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # CONFIG
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-REPO_NAME = os.environ.get("REPO_NAME") # format: "username/repo"
+REPO_NAME = os.environ.get("GITHUB_REPO") # format: "username/repo"
 
 # DOMAIN REGEX
 ALLOWED_DOMAINS = r"^(https?:\/\/)?([\w-]+\.)+(onrender\.com|vercel\.app|cyclic\.app)(\/.*)?$"
